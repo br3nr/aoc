@@ -18,4 +18,5 @@ for num in a1:
     if num in a2_d:
         sim_score += num * a2_d[num]
 
+
 print(sim_score)
