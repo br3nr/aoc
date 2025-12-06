@@ -1,23 +1,17 @@
 # note:
-# simple enough but I wonder how my solution will affect part 2?
-# OK LOL commiting this as it has a memory error, i see the issue
-# will solve later
-
-f = open("test.txt")
+# yeyeyeyeyeye 
+f = open("input.txt")
 f = f.read().split("\n\n")
 
 ranges = f[0].split("\n")
-ingredients = f[1].split("\n")
-
-avail = {}
-
-for r in ranges:
-    s, e = map(int, r.split("-"))
-    avail.update({i: 1 for i in range(s, e + 1)})
+ingredients = map(int, f[1].split("\n"))
 
 c = 0
 for i in ingredients:
-    if int(i) in avail:
-        c += 1
+        for r in ranges:
+            s, e = map(int, r.split("-"))
+            if int(i) >= int(s) and int(i) <= int(e):
+                c += 1
+                break
 
 print(c)
