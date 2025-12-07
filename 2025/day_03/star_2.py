@@ -1,25 +1,38 @@
 # notes:
-# hahaha
-# oh god, ok
-# this is a bit cooked.
+# solved this one on day 7, took me ages even tho I conceptually
+# understood it. I just couldnt quite get the window sliding
+# down.
 
-# ok so the gaps can be distributed all along the battery
-# 234234234234278 is 434234234278
-#   ^ ^^^^^^^^^^^
-# 91919191919191919191919191 would have a final number of 999999999999
-# perhaps, we can rotate the highest values down, like shuffle down
-# or shuffle up?
+# (つ╥﹏╥)つ i am glad this one is over
 
-# if we get to a certain number of values, we would know that all subsequent ones are added to the sequence
-
-f = open("input.txt")
-batteries = f.read().split("\n")
-
-batteries = ["234234234234278"]
-
-counter = 0
+batteries = open("input.txt").read().split("\n")
+c = 0
 for bank in batteries:
-    low, high = 0, 0
-    print(len(bank))
+
     bank = list(map(int, bank))
 
+    ptr = 0
+    joltige = []
+    dist = 12
+
+    while len(joltige) != 12:
+        dist = len(bank) - (12 - len(joltige)) + 1
+
+        if ptr == dist:
+            joltige.extend(bank[ptr:])
+            break
+
+        max_num = 0
+        max_idx = ptr
+
+        for i in range(ptr, dist):
+            if bank[i] > max_num:
+                max_num = bank[i]
+                max_idx = i
+
+        joltige.append(max_num)
+        ptr = max_idx + 1
+
+    c += int("".join(map(str, joltige)))
+
+print(c)
